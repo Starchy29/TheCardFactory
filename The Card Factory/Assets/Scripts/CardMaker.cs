@@ -43,6 +43,7 @@ public class CardMaker : MonoBehaviour {
     [SerializeField] private TMPro.TextMeshProUGUI CostBox;
     [SerializeField] private TMPro.TextMeshProUGUI RulesBox;
     [SerializeField] private TMPro.TextMeshProUGUI PTBox;
+    [SerializeField] private GameObject UICover;
     [SerializeField] private List<Toggle> keywordToggles; // order should match ability indices
     [SerializeField] private TMPro.TMP_Dropdown[] abilityDropdowns;
 
@@ -269,6 +270,17 @@ public class CardMaker : MonoBehaviour {
         ability.Effect = CreatureAbility.Effects[index];
         CheckValidAbilities();
         UpdateCard();
+    }
+
+    public void Print() {
+        UICover.SetActive(true);
+        ScreenCapture.CaptureScreenshot("custom card.png");
+        Debug.Log("captured screenshot");
+        Invoke("HideCover", 0.2f);
+    }
+
+    private void HideCover() {
+        UICover.SetActive(false);
     }
     #endregion
 
