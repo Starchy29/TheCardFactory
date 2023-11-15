@@ -23,7 +23,7 @@ public class Colors {
     }
 }
 
-public struct Ability {
+public class Ability {
     public string name;
     public int pointCost;
     public Colors colorRequirement;
@@ -43,6 +43,7 @@ public class CardMaker : MonoBehaviour {
     [SerializeField] private TMPro.TextMeshProUGUI CostBox;
     [SerializeField] private TMPro.TextMeshProUGUI RulesBox;
     [SerializeField] private TMPro.TextMeshProUGUI PTBox;
+    [SerializeField] private List<Toggle> keywordToggles; // order should match ability indices
 
     private const int POINTS_PER_MANA = 3;
 
@@ -57,6 +58,7 @@ public class CardMaker : MonoBehaviour {
     void Start() {
         ColorIdentity = new Colors(false, false, false, false, false);
         DefineAbilities();
+        CheckValidAbilities();
         UpdateCard();
     }
 
@@ -121,6 +123,18 @@ public class CardMaker : MonoBehaviour {
             ColorIdentity.green && requirements.green;
     }
 
+    private void CheckValidAbilities() {
+        for(int i = 0; i < keywordOptions.Length; i++) {
+            bool valid = HasRequiredColor(keywordOptions[i].colorRequirement);
+            keywordToggles[i].interactable = valid;
+            if(keywordOptions[i].chosen && !valid) {
+                keywordOptions[i].chosen = false;
+                keywordToggles[i].isOn = false;
+                keywordToggles[i].onValueChanged.Invoke(false);
+            }
+        }
+    }
+
     #region Button Events
     public void IncreaseManaValue() {
         if(ManaValue >= 9) {
@@ -132,7 +146,7 @@ public class CardMaker : MonoBehaviour {
     }
 
     public void DecreaseManaValue() {
-        if(ManaValue <= 0) {
+        if(ManaValue <= ColorIdentity.Total()) {
             return;
         }
 
@@ -181,6 +195,7 @@ public class CardMaker : MonoBehaviour {
         if(ManaValue < ColorIdentity.Total()) {
             ManaValue = ColorIdentity.Total();
         }
+        CheckValidAbilities();
         UpdateCard();
     }
 
@@ -203,6 +218,13 @@ public class CardMaker : MonoBehaviour {
     public void ToggleGreen() {
         ToggleColor(ref ColorIdentity.green);
     }
+
+    public void ToggleKeyword(Toggle thrower) {
+        Ability ability = keywordOptions[keywordToggles.IndexOf(thrower)];
+        ability.chosen = !ability.chosen;
+        UpdateCard();
+    }
+
     #endregion
 
     private void DefineAbilities() {
@@ -216,9 +238,9 @@ public class CardMaker : MonoBehaviour {
         keywordOptions[5] = new Ability("trample", 2, new Colors(false, false, false, true, true));
         keywordOptions[6] = new Ability("menace", 1, new Colors(false, false, true, true, false));
         keywordOptions[7] = new Ability("deathtouch", 1, new Colors(false, false, true, false, true));
-        keywordOptions[8] = new Ability("first strike", 2, new Colors(true, false, false, true, false));
-        keywordOptions[9] = new Ability("lifelink", 2, new Colors(true, false, true, false, false));
-        keywordOptions[10] = new Ability("vigilance", 2, new Colors(true, false, false, false, true));
+        keywordOptions[8] = new Ability("lifelink", 2, new Colors(true, false, true, false, false));
+        keywordOptions[9] = new Ability("vigilance", 2, new Colors(true, false, false, false, true));
+        keywordOptions[10] = new Ability("first strike", 2, new Colors(true, false, false, true, false));
         keywordOptions[11] = new Ability("double strike", 4, new Colors(true, false, false, true, false));
         keywordOptions[12] = new Ability("prowess", 2, new Colors(true, true, false, true, false));
         keywordOptions[13] = new Ability("skulk", 2, new Colors(false, true, true, false, false));
