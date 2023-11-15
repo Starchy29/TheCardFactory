@@ -44,6 +44,7 @@ public class CardMaker : MonoBehaviour {
     [SerializeField] private TMPro.TextMeshProUGUI RulesBox;
     [SerializeField] private TMPro.TextMeshProUGUI PTBox;
     [SerializeField] private List<Toggle> keywordToggles; // order should match ability indices
+    [SerializeField] private TMPro.TMP_Dropdown[] abilityDropdowns;
 
     private const int POINTS_PER_MANA = 3;
 
@@ -54,8 +55,17 @@ public class CardMaker : MonoBehaviour {
     public int Toughness { get; private set; }
 
     private Ability[] keywordOptions;
+    private CreatureAbility ability1;
+    private CreatureAbility ability2;
 
     void Start() {
+        abilityDropdowns[0].onValueChanged.AddListener((index) => { SetAbilityTrigger(ability1, index); });
+        abilityDropdowns[1].onValueChanged.AddListener((index) => { SetAbilityEffect(ability1, index); });
+        abilityDropdowns[2].onValueChanged.AddListener((index) => { SetAbilityTrigger(ability2, index); });
+        abilityDropdowns[3].onValueChanged.AddListener((index) => { SetAbilityEffect(ability2, index); });
+        ability1 = new CreatureAbility();
+        ability2 = new CreatureAbility();
+
         ColorIdentity = new Colors(false, false, false, false, false);
         DefineAbilities();
         CheckValidAbilities();
@@ -74,6 +84,13 @@ public class CardMaker : MonoBehaviour {
             if(ability.chosen) {
                 PointTotal -= ability.pointCost;
             }
+        }
+
+        if(ability1 != null && ability1.Active && HasRequiredColor(ability1.Effect.ColorRequirement)) {
+            PointTotal -= ability1.Cost;
+        }
+        if(ability2 != null && ability2.Active && HasRequiredColor(ability2.Effect.ColorRequirement)) {
+            PointTotal -= ability2.Cost;
         }
     }
 
@@ -107,16 +124,22 @@ public class CardMaker : MonoBehaviour {
             rulesText = rulesText.Substring(0, rulesText.Length - 2); // eliminate ending ", "
             rulesText = (rulesText[0] + "").ToUpper() + rulesText.Substring(1, rulesText.Length - 1); // capitalize first letter
         }
+
+
+        if(ability1 != null && ability1.Active && HasRequiredColor(ability1.Effect.ColorRequirement)) {
+            rulesText += (rulesText.Length > 0 ? "\n" : "") + ability1.Text;
+        }
+        if(ability2 != null && ability2.Active && HasRequiredColor(ability2.Effect.ColorRequirement)) {
+            rulesText += (rulesText.Length > 0 ? "\n" : "") + ability2.Text;
+        }
+
         rulesText = rulesText.Replace("CARDNAME", NameBox.text);
         RulesBox.text = rulesText;
     }
 
     private bool HasRequiredColor(Colors requirements) {
-        if(requirements.Total() == 0) {
-            return true;
-        }
-
-        return ColorIdentity.white && requirements.white ||
+        return requirements.Total() == 5 ||
+            ColorIdentity.white && requirements.white ||
             ColorIdentity.blue && requirements.blue ||
             ColorIdentity.black && requirements.black ||
             ColorIdentity.red && requirements.red ||
@@ -124,6 +147,7 @@ public class CardMaker : MonoBehaviour {
     }
 
     private void CheckValidAbilities() {
+        // check keywords
         for(int i = 0; i < keywordOptions.Length; i++) {
             bool valid = HasRequiredColor(keywordOptions[i].colorRequirement);
             keywordToggles[i].interactable = valid;
@@ -225,13 +249,34 @@ public class CardMaker : MonoBehaviour {
         UpdateCard();
     }
 
+    public void UpdateName(TMPro.TextMeshProUGUI inputText) {
+        NameBox.text = inputText.text;
+    }
+
+    private void SetAbilityTrigger(CreatureAbility ability, int index) {
+        if(index == 0) {
+            ability.Active = false;
+            UpdateCard();
+            return;
+        }
+
+        ability.Active = true;
+        ability.Trigger = CreatureAbility.Triggers[index - 1];
+        UpdateCard();
+    }
+
+    private void SetAbilityEffect(CreatureAbility ability, int index) {
+        ability.Effect = CreatureAbility.Effects[index];
+        CheckValidAbilities();
+        UpdateCard();
+    }
     #endregion
 
     private void DefineAbilities() {
         keywordOptions = new Ability[16];
 
-        keywordOptions[0] = new Ability("CARDNAME can't block", -2, new Colors(false, false, false, false, false));
-        keywordOptions[1] = new Ability("defender", -2, new Colors(false, false, false, false, false));
+        keywordOptions[0] = new Ability("CARDNAME can't block", -2, new Colors(true, true, true, true, true));
+        keywordOptions[1] = new Ability("defender", -2, new Colors(true, true, true, true, true));
         keywordOptions[2] = new Ability("flying", 2, new Colors(true, true, true, false, false));
         keywordOptions[3] = new Ability("reach", 1, new Colors(false, false, false, true, true));
         keywordOptions[4] = new Ability("haste", 2, new Colors(false, false, false, true, false));
@@ -241,10 +286,10 @@ public class CardMaker : MonoBehaviour {
         keywordOptions[8] = new Ability("lifelink", 2, new Colors(true, false, true, false, false));
         keywordOptions[9] = new Ability("vigilance", 2, new Colors(true, false, false, false, true));
         keywordOptions[10] = new Ability("first strike", 2, new Colors(true, false, false, true, false));
-        keywordOptions[11] = new Ability("double strike", 4, new Colors(true, false, false, true, false));
+        keywordOptions[11] = new Ability("double strike", 5, new Colors(true, false, false, true, false));
         keywordOptions[12] = new Ability("prowess", 2, new Colors(true, true, false, true, false));
         keywordOptions[13] = new Ability("skulk", 2, new Colors(false, true, true, false, false));
         keywordOptions[14] = new Ability("ward 2", 3, new Colors(true, true, false, false, true));
-        keywordOptions[15] = new Ability("indestructible", 4, new Colors(true, false, true, false, true));
+        keywordOptions[15] = new Ability("indestructible", 6, new Colors(true, false, true, false, true));
     }
 }
