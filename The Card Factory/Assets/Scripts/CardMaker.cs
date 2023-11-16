@@ -261,13 +261,17 @@ public class CardMaker : MonoBehaviour {
 
     public void Print() {
         UICover.SetActive(true);
-        ScreenCapture.CaptureScreenshot("custom card.png");
+        ScreenCapture.CaptureScreenshot("..\\custom card.png");
         Debug.Log("captured screenshot");
         Invoke("HideCover", 0.2f);
     }
 
     private void HideCover() {
         UICover.SetActive(false);
+    }
+
+    public void Quit() {
+        Application.Quit();
     }
     #endregion
 
