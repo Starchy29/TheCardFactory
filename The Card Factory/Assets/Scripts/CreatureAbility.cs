@@ -50,7 +50,7 @@ public class CreatureAbility
     };
 
     public static AbilityEffect[] Effects = new AbilityEffect[6] {
-        new AbilityEffect("draw a card", 3, new Colors(false, true, false, false, true)),
+        new AbilityEffect("draw a card", 4, new Colors(false, true, false, false, true)),
         new AbilityEffect("surveil 2", 1, new Colors(false, true, true, false, true)),
         new AbilityEffect("create a treasure token", 3, new Colors(false, false, false, true, true)),
         new AbilityEffect("create a 1/1 colorless Human creature token", 2, new Colors(true, false, false, true, true)),

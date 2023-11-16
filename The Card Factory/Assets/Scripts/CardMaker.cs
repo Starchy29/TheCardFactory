@@ -287,8 +287,8 @@ public class CardMaker : MonoBehaviour {
     private void DefineAbilities() {
         keywordOptions = new Ability[16];
 
-        keywordOptions[0] = new Ability("CARDNAME can't block", -2, new Colors(true, true, true, true, true));
-        keywordOptions[1] = new Ability("defender", -2, new Colors(true, true, true, true, true));
+        keywordOptions[0] = new Ability("CARDNAME can't block", -1, new Colors(true, true, true, true, true));
+        keywordOptions[1] = new Ability("defender", -1, new Colors(true, true, true, true, true));
         keywordOptions[2] = new Ability("flying", 2, new Colors(true, true, true, false, false));
         keywordOptions[3] = new Ability("reach", 1, new Colors(false, false, false, true, true));
         keywordOptions[4] = new Ability("haste", 2, new Colors(false, false, false, true, false));
