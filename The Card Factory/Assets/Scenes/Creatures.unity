@@ -316,7 +316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Draw a card (UG)
+  m_text: Loot (UR)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3268,17 +3268,31 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Draw a card (UG)
+    - m_Text: Loot (UR)
       m_Image: {fileID: 0}
-    - m_Text: Surveil 2 (UBG)
+    - m_Text: Gain 3 life (WBG)
+      m_Image: {fileID: 0}
+    - m_Text: Burn (BR)
+      m_Image: {fileID: 0}
+    - m_Text: +1/+1 (WBG)
+      m_Image: {fileID: 0}
+    - m_Text: Draw a card (UG)
       m_Image: {fileID: 0}
     - m_Text: Treasure (RG)
       m_Image: {fileID: 0}
-    - m_Text: Create 1/1 (WRG)
+    - m_Text: Make 2/2 (WRG)
       m_Image: {fileID: 0}
-    - m_Text: +1 counter (WBG)
+    - m_Text: Regrowth (G)
       m_Image: {fileID: 0}
-    - m_Text: Gain 3 life (WBG)
+    - m_Text: Reanimate (WB)
+      m_Image: {fileID: 0}
+    - m_Text: Bounce (B)
+      m_Image: {fileID: 0}
+    - m_Text: O-Ring (W)
+      m_Image: {fileID: 0}
+    - m_Text: Naturalize (WG)
+      m_Image: {fileID: 0}
+    - m_Text: Fight (RG)
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3776,8 +3790,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105.2, y: -174.7}
-  m_SizeDelta: {x: 89.2243, y: 89.2243}
+  m_AnchoredPosition: {x: 105.2, y: -176.9}
+  m_SizeDelta: {x: 89.2243, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &642520633
 MonoBehaviour:
@@ -4189,11 +4203,15 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Dies
       m_Image: {fileID: 0}
+    - m_Text: Sacrifice
+      m_Image: {fileID: 0}
     - m_Text: Combat Damage
       m_Image: {fileID: 0}
     - m_Text: Tap
       m_Image: {fileID: 0}
     - m_Text: 2 + Tap
+      m_Image: {fileID: 0}
+    - m_Text: '4:'
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7640,17 +7658,31 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Draw a card (UG)
+    - m_Text: Loot (UR)
       m_Image: {fileID: 0}
-    - m_Text: Surveil 2 (UBG)
+    - m_Text: Gain 3 life (WBG)
+      m_Image: {fileID: 0}
+    - m_Text: Burn (BR)
+      m_Image: {fileID: 0}
+    - m_Text: +1/+1 (WBG)
+      m_Image: {fileID: 0}
+    - m_Text: Draw a card (UG)
       m_Image: {fileID: 0}
     - m_Text: Treasure (RG)
       m_Image: {fileID: 0}
-    - m_Text: Create 1/1 (WRG)
+    - m_Text: Make 2/2 (WRG)
       m_Image: {fileID: 0}
-    - m_Text: +1 counter (WBG)
+    - m_Text: Regrowth (G)
       m_Image: {fileID: 0}
-    - m_Text: Gain 3 life (WBG)
+    - m_Text: Reanimate (WB)
+      m_Image: {fileID: 0}
+    - m_Text: Bounce (B)
+      m_Image: {fileID: 0}
+    - m_Text: O-Ring (W)
+      m_Image: {fileID: 0}
+    - m_Text: Naturalize (WG)
+      m_Image: {fileID: 0}
+    - m_Text: Fight (RG)
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10553,7 +10585,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Draw a card (UG)
+  m_text: Loot (UR)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10844,7 +10876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105.47194, y: -174.7}
+  m_AnchoredPosition: {x: 105.47194, y: -176.9}
   m_SizeDelta: {x: 67.5462, y: 21.9077}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1613013212
@@ -12032,11 +12064,15 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Dies
       m_Image: {fileID: 0}
+    - m_Text: Sacrifice
+      m_Image: {fileID: 0}
     - m_Text: Combat Damage
       m_Image: {fileID: 0}
     - m_Text: Tap
       m_Image: {fileID: 0}
     - m_Text: 2 + Tap
+      m_Image: {fileID: 0}
+    - m_Text: '4:'
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13157,7 +13193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 345.0954, y: 482.3809}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1941803319

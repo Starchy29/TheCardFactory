@@ -24,14 +24,14 @@ public class Colors {
 }
 
 public class Ability {
-    public string name;
+    public string text;
     public int pointCost;
     public Colors colorRequirement;
     public bool chosen;
 
-    public Ability(string name, int pointCost, Colors colorRequirement) {
+    public Ability(string text, int pointCost, Colors colorRequirement) {
         this.pointCost = pointCost;
-        this.name = name;
+        this.text = text;
         this.colorRequirement = colorRequirement;
         chosen = false;
     }
@@ -67,6 +67,7 @@ public class CardMaker : MonoBehaviour {
         ability1 = new CreatureAbility();
         ability2 = new CreatureAbility();
 
+        Toughness = 1;
         ColorIdentity = new Colors(false, false, false, false, false);
         DefineAbilities();
         CheckValidAbilities();
@@ -87,10 +88,10 @@ public class CardMaker : MonoBehaviour {
             }
         }
 
-        if(ability1 != null && ability1.Active && HasRequiredColor(ability1.Effect.ColorRequirement)) {
+        if(ability1 != null && ability1.Active && HasRequiredColor(ability1.Effect.colorRequirement)) {
             PointTotal -= ability1.Cost;
         }
-        if(ability2 != null && ability2.Active && HasRequiredColor(ability2.Effect.ColorRequirement)) {
+        if(ability2 != null && ability2.Active && HasRequiredColor(ability2.Effect.colorRequirement)) {
             PointTotal -= ability2.Cost;
         }
     }
@@ -118,7 +119,7 @@ public class CardMaker : MonoBehaviour {
         string rulesText = "";
         foreach(Ability ability in keywordOptions) {
             if(ability.chosen) {
-                rulesText += ability.name + ", ";
+                rulesText += ability.text + ", ";
             }
         }
         if(rulesText.Length > 0) {
@@ -127,10 +128,10 @@ public class CardMaker : MonoBehaviour {
         }
 
 
-        if(ability1 != null && ability1.Active && HasRequiredColor(ability1.Effect.ColorRequirement)) {
+        if(ability1 != null && ability1.Active && HasRequiredColor(ability1.Effect.colorRequirement)) {
             rulesText += (rulesText.Length > 0 ? "\n" : "") + ability1.Text;
         }
-        if(ability2 != null && ability2.Active && HasRequiredColor(ability2.Effect.ColorRequirement)) {
+        if(ability2 != null && ability2.Active && HasRequiredColor(ability2.Effect.colorRequirement)) {
             rulesText += (rulesText.Length > 0 ? "\n" : "") + ability2.Text;
         }
 
@@ -207,7 +208,7 @@ public class CardMaker : MonoBehaviour {
     }
 
     public void DecreaseToughness() {
-        if(Toughness <= 0) {
+        if(Toughness <= 1) {
             return;
         }
 
@@ -224,25 +225,11 @@ public class CardMaker : MonoBehaviour {
         UpdateCard();
     }
 
-    public void ToggleWhite() {
-        ToggleColor(ref ColorIdentity.white);
-    }
-
-    public void ToggleBlue() {
-        ToggleColor(ref ColorIdentity.blue);
-    }
-
-    public void ToggleBlack() {
-        ToggleColor(ref ColorIdentity.black);
-    }
-
-    public void ToggleRed() {
-        ToggleColor(ref ColorIdentity.red);
-    }
-
-    public void ToggleGreen() {
-        ToggleColor(ref ColorIdentity.green);
-    }
+    public void ToggleWhite() { ToggleColor(ref ColorIdentity.white); }
+    public void ToggleBlue() { ToggleColor(ref ColorIdentity.blue); }
+    public void ToggleBlack() { ToggleColor(ref ColorIdentity.black); }
+    public void ToggleRed() { ToggleColor(ref ColorIdentity.red); }
+    public void ToggleGreen() { ToggleColor(ref ColorIdentity.green); }
 
     public void ToggleKeyword(Toggle thrower) {
         Ability ability = keywordOptions[keywordToggles.IndexOf(thrower)];
@@ -287,19 +274,19 @@ public class CardMaker : MonoBehaviour {
     private void DefineAbilities() {
         keywordOptions = new Ability[16];
 
-        keywordOptions[0] = new Ability("CARDNAME can't block", -1, new Colors(true, true, true, true, true));
-        keywordOptions[1] = new Ability("defender", -1, new Colors(true, true, true, true, true));
-        keywordOptions[2] = new Ability("flying", 2, new Colors(true, true, true, false, false));
+        keywordOptions[0] = new Ability("CARDNAME can't block", -2, new Colors(true, true, true, true, true));
+        keywordOptions[1] = new Ability("defender", -2, new Colors(true, true, true, true, true));
+        keywordOptions[2] = new Ability("flying", 3, new Colors(true, true, true, false, false));
         keywordOptions[3] = new Ability("reach", 1, new Colors(false, false, false, true, true));
-        keywordOptions[4] = new Ability("haste", 2, new Colors(false, false, false, true, false));
-        keywordOptions[5] = new Ability("trample", 2, new Colors(false, false, false, true, true));
-        keywordOptions[6] = new Ability("menace", 1, new Colors(false, false, true, true, false));
-        keywordOptions[7] = new Ability("deathtouch", 1, new Colors(false, false, true, false, true));
-        keywordOptions[8] = new Ability("lifelink", 2, new Colors(true, false, true, false, false));
-        keywordOptions[9] = new Ability("vigilance", 2, new Colors(true, false, false, false, true));
-        keywordOptions[10] = new Ability("first strike", 2, new Colors(true, false, false, true, false));
-        keywordOptions[11] = new Ability("double strike", 5, new Colors(true, false, false, true, false));
-        keywordOptions[12] = new Ability("prowess", 2, new Colors(true, true, false, true, false));
+        keywordOptions[4] = new Ability("haste", 3, new Colors(false, false, false, true, false));
+        keywordOptions[5] = new Ability("trample", 3, new Colors(false, false, false, true, true));
+        keywordOptions[6] = new Ability("menace", 2, new Colors(false, false, true, true, false));
+        keywordOptions[7] = new Ability("deathtouch", 2, new Colors(false, false, true, false, true));
+        keywordOptions[8] = new Ability("lifelink", 3, new Colors(true, false, true, false, false));
+        keywordOptions[9] = new Ability("vigilance", 3, new Colors(true, false, false, false, true));
+        keywordOptions[10] = new Ability("first strike", 3, new Colors(true, false, false, true, false));
+        keywordOptions[11] = new Ability("double strike", 6, new Colors(true, false, false, true, false));
+        keywordOptions[12] = new Ability("prowess", 4, new Colors(true, true, false, true, false));
         keywordOptions[13] = new Ability("skulk", 2, new Colors(false, true, true, false, false));
         keywordOptions[14] = new Ability("ward 2", 3, new Colors(true, true, false, false, true));
         keywordOptions[15] = new Ability("indestructible", 6, new Colors(true, false, true, false, true));
