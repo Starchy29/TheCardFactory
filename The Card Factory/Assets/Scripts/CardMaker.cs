@@ -127,7 +127,6 @@ public class CardMaker : MonoBehaviour {
             rulesText = (rulesText[0] + "").ToUpper() + rulesText.Substring(1, rulesText.Length - 1); // capitalize first letter
         }
 
-
         if(ability1 != null && ability1.Active && HasRequiredColor(ability1.Effect.colorRequirement)) {
             rulesText += (rulesText.Length > 0 ? "\n" : "") + ability1.Text;
         }
@@ -276,23 +275,27 @@ public class CardMaker : MonoBehaviour {
     #endregion
 
     private void DefineAbilities() {
-        keywordOptions = new Ability[16];
+        keywordOptions = new Ability[20];
 
-        keywordOptions[0] = new Ability("CARDNAME can't block", -2, new Colors(true, true, true, true, true));
-        keywordOptions[1] = new Ability("defender", -2, new Colors(true, true, true, true, true));
-        keywordOptions[2] = new Ability("flying", 3, new Colors(true, true, true, false, false));
-        keywordOptions[3] = new Ability("reach", 1, new Colors(false, false, false, true, true));
-        keywordOptions[4] = new Ability("haste", 3, new Colors(false, false, false, true, false));
-        keywordOptions[5] = new Ability("trample", 3, new Colors(false, false, false, true, true));
-        keywordOptions[6] = new Ability("menace", 2, new Colors(false, false, true, true, false));
-        keywordOptions[7] = new Ability("deathtouch", 2, new Colors(false, false, true, false, true));
-        keywordOptions[8] = new Ability("lifelink", 3, new Colors(true, false, true, false, false));
-        keywordOptions[9] = new Ability("vigilance", 3, new Colors(true, false, false, false, true));
-        keywordOptions[10] = new Ability("first strike", 3, new Colors(true, false, false, true, false));
-        keywordOptions[11] = new Ability("double strike", 6, new Colors(true, false, false, true, false));
-        keywordOptions[12] = new Ability("prowess", 4, new Colors(true, true, false, true, false));
-        keywordOptions[13] = new Ability("skulk", 2, new Colors(false, true, true, false, false));
-        keywordOptions[14] = new Ability("ward 2", 3, new Colors(true, true, false, false, true));
-        keywordOptions[15] = new Ability("indestructible", 6, new Colors(true, false, true, false, true));
+        keywordOptions[0] = new Ability("flash", 4, new Colors(true, true, true, false, false));
+        keywordOptions[1] = new Ability("CARDNAME enters the battlefield with a shield counter on it", 4, new Colors(true, true, true, false, true));
+        keywordOptions[2] = new Ability("CARDNAME can't block, ", -2, new Colors(true, true, true, true, true));
+        keywordOptions[3] = new Ability("defender", -2, new Colors(true, true, true, true, true));
+        keywordOptions[4] = new Ability("flying", 3, new Colors(true, true, true, false, false));
+        keywordOptions[5] = new Ability("reach", 1, new Colors(false, false, false, true, true));
+        keywordOptions[6] = new Ability("haste", 3, new Colors(false, false, false, true, false));
+        keywordOptions[7] = new Ability("trample", 3, new Colors(false, false, false, true, true));
+        keywordOptions[8] = new Ability("menace", 2, new Colors(false, false, true, true, false));
+        keywordOptions[9] = new Ability("deathtouch", 2, new Colors(false, false, true, false, true));
+        keywordOptions[10] = new Ability("lifelink", 3, new Colors(true, false, true, false, false));
+        keywordOptions[11] = new Ability("vigilance", 3, new Colors(true, false, false, false, true));
+        keywordOptions[12] = new Ability("first strike", 3, new Colors(true, false, false, true, false));
+        keywordOptions[13] = new Ability("double strike", 6, new Colors(true, false, false, true, false));
+        keywordOptions[14] = new Ability("prowess", 4, new Colors(true, true, false, true, false));
+        keywordOptions[15] = new Ability("skulk", 2, new Colors(false, true, true, false, false));
+        keywordOptions[16] = new Ability("ward 2", 3, new Colors(true, true, false, false, true));
+        keywordOptions[17] = new Ability("convoke", 6, new Colors(true, true, true, true, true));
+        keywordOptions[18] = new Ability("embalm 4", 6, new Colors(true, true, true, true, true));
+        keywordOptions[19] = new Ability("battle cry", 5, new Colors(true, false, false, true, false));
     }
 }
