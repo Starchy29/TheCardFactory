@@ -32,7 +32,7 @@ public class CreatureAbility
     public static AbilityTrigger[] Triggers = new AbilityTrigger[7] {
         new AbilityTrigger("When CARDNAME enters the battlefield, ", (cost) => { return cost + 2; }),
         new AbilityTrigger("When CARDNAME dies, ", (cost) => { return cost; }),
-        new AbilityTrigger("Sacrifice CARDNAME: ", (cost) => { return cost + 1; }),
+        new AbilityTrigger("(>), Sacrifice CARDNAME: ", (cost) => { return cost; }),
         new AbilityTrigger("Whenever CARDNAME deals combat damage to a player, ", (cost) => { return cost * 2; }),
         new AbilityTrigger("(>): ", (cost) => { return cost * 2 + 2; }),
         new AbilityTrigger("(2), (>): ", (cost) => { return Mathf.CeilToInt(cost * 1.5f); }),

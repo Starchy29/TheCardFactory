@@ -45,5 +45,10 @@ public class CardMerger : MonoBehaviour
         if(leftCard == null || rightCard == null) {
             return;
         }
+
+        if(leftCard.name == null || rightCard.name == null) {
+            // does not work for cards with multiple faces
+            return;
+        }
     }
 }
