@@ -238,6 +238,7 @@ public class CardMaker : MonoBehaviour {
 
     public void UpdateName(TMPro.TextMeshProUGUI inputText) {
         NameBox.text = inputText.text;
+        UpdateCard();
     }
 
     private void SetAbilityTrigger(CreatureAbility ability, int index) {
