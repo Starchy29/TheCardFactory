@@ -13,4 +13,5 @@ public class CardData
     public string power;
     public string toughness;
     public string[] keywords;
+    public CardData[] card_faces;
 }
