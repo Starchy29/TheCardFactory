@@ -5,6 +5,13 @@ using UnityEngine.Networking;
 
 public class CardMerger : MonoBehaviour
 {
+    [SerializeField] private TMPro.TextMeshProUGUI NameBox;
+    [SerializeField] private TMPro.TextMeshProUGUI CostBox;
+    [SerializeField] private TMPro.TextMeshProUGUI RulesBox;
+    [SerializeField] private TMPro.TextMeshProUGUI PTBox;
+    [SerializeField] private TMPro.TextMeshProUGUI TypeBox;
+    [SerializeField] private GameObject UICover;
+
     private CardData leftCard;
     private CardData rightCard;
     private bool downloadToLeft; // false: downloads to right
@@ -25,7 +32,7 @@ public class CardMerger : MonoBehaviour
                 case UnityWebRequest.Result.ConnectionError:
                 case UnityWebRequest.Result.DataProcessingError:
                 case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError("Error: " + webRequest.error);
+                    Debug.Log("Error: " + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
                     CardData cardResult = JsonUtility.FromJson<CardData>(webRequest.downloadHandler.text);
@@ -34,7 +41,7 @@ public class CardMerger : MonoBehaviour
                     } else {
                         rightCard = cardResult;
                     }
-                    MergeCards();
+                    DisplayCard();
                     break;
             }
         }
@@ -51,4 +58,28 @@ public class CardMerger : MonoBehaviour
             return;
         }
     }
+
+    private void DisplayCard() {
+        if(leftCard == null) {
+            return;
+        }
+
+        NameBox.text = leftCard.name;
+        CostBox.text = leftCard.mana_cost;
+        TypeBox.text = leftCard.type_line;
+        RulesBox.text = leftCard.oracle_text;
+        PTBox.text = leftCard.power + "/" + leftCard.toughness; 
+    }
+
+    #region UI functions
+    public void SearchLeft(string searchTerm) {
+        downloadToLeft = true;
+        SearchCard(searchTerm);
+    }
+
+    public void SearchRight(string searchTerm) {
+        downloadToLeft = false;
+        SearchCard(searchTerm);
+    }
+    #endregion
 }
