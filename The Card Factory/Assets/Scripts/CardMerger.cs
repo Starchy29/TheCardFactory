@@ -32,7 +32,6 @@ public class CardMerger : MonoBehaviour
         "Planeswalker",
         "Scheme",
         "Sorcery",
-        "Kindred",
         "Vanguard",
         "Token",
         "Aura",
@@ -60,6 +59,16 @@ public class CardMerger : MonoBehaviour
         "Hexproof",
         "Indestructible",
         "Enlist"
+    };
+
+    private static List<string> typeOrder = new List<string> {
+        "Legendary",
+        "Snow",
+        "Tribal",
+        "Kindred",
+        "Artifact",
+        "Enchantment",
+        "Creature"
     };
 
     public void SearchCard(string cardName) {
@@ -146,10 +155,18 @@ public class CardMerger : MonoBehaviour
             mergedCard.oracle_text = keywordChunk + "\n" + mergedCard.oracle_text;
         }
 
+        if(mergedCard.type_line.Contains("Creature") && mergedCard.type_line.Contains("Equipment")) {
+            mergedCard.oracle_text = mergedCard.oracle_text.Replace("\nEquip {", "\nReconfigure {").Replace("\nEquip—", "\nReconfigure—");
+        }
+
         DisplayCard();
     }
 
     private HashSet<string> RemoveKeywords(ref string ruleText, string[] cardKeywords) {
+        if(cardKeywords == null || cardKeywords.Length == 0) {
+            return new HashSet<string>();
+        }
+
         HashSet<string> removedKeywords = new HashSet<string>();
         foreach(string possibleKeyword in cardKeywords) {
             if(keywords.Contains(possibleKeyword)) {
@@ -254,7 +271,29 @@ public class CardMerger : MonoBehaviour
     }
 
     private string MergeTypes(string leftType, string rightType) {
-        return leftType;
+        string[] leftTypes = leftType.Split(' ');
+        string[] rightTypes = rightType.Split(' ');
+
+        List<string> types = new List<string>(leftTypes);
+        foreach(string type in rightTypes) {
+            if(!types.Contains(type)) {
+                types.Add(type);
+            }
+        }
+
+        types.Sort((string cur, string next) => { return TypeSortValue(cur) - TypeSortValue(next); });
+
+        string typeLine = "";
+        foreach(string type in types) {
+            typeLine += type + " ";
+        }
+        
+        return typeLine;
+    }
+
+    private int TypeSortValue(string type) {
+        int index = typeOrder.IndexOf(type);
+        return index == -1 ? int.MaxValue : index;
     }
 
     private string MergePowers(string leftPower, string rightPower) {
