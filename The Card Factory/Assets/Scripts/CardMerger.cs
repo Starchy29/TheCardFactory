@@ -92,7 +92,9 @@ public class CardMerger : MonoBehaviour
                 case UnityWebRequest.Result.Success:
                     CardData cardResult = JsonUtility.FromJson<CardData>(webRequest.downloadHandler.text);
                     if(cardResult.card_faces != null) {
+                        string[] storedKeywords = cardResult.keywords;
                         cardResult = cardResult.card_faces[0]; // for double-sided cards, use the front face
+                        cardResult.keywords = storedKeywords;
                     }
 
                     bool validCard = true;
@@ -184,7 +186,7 @@ public class CardMerger : MonoBehaviour
         }
 
         for(int i = 0; i < ruleText.Length; i++) {
-            if(ruleText[i] != ',' && ruleText[i] != ' ' && ruleText[i] != '\n') {
+            if(ruleText[i] != ',' && ruleText[i] != ' ' && ruleText[i] != '\n' && ruleText[i] != ';') {
                 ruleText = ruleText.Substring(i);
                 break;
             }
@@ -194,6 +196,10 @@ public class CardMerger : MonoBehaviour
     }
 
     private string MergeNames(string leftName, string rightName) {
+        if(leftName == rightName) {
+            return leftName + " x2";
+        }
+
         string[] leftWords = leftName.Split(' ');
         string[] rightWords = rightName.Split(' ');
 
