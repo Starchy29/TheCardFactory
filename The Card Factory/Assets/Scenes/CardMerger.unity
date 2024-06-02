@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.4189, y: -116.30342}
-  m_SizeDelta: {x: 249.22, y: 124.3252}
+  m_AnchoredPosition: {x: -4.4189, y: -108.11968}
+  m_SizeDelta: {x: 249.22, y: 107.9577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &172724534
 MonoBehaviour:
@@ -1457,8 +1457,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.7, y: 186.7}
-  m_SizeDelta: {x: 242.655, y: 21.9077}
+  m_AnchoredPosition: {x: -54.395176, y: 186.7}
+  m_SizeDelta: {x: 149.2647, y: 21.9077}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845669400
 MonoBehaviour:
@@ -1510,9 +1510,9 @@ MonoBehaviour:
   m_fontSize: 14
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 6
+  m_fontSizeMax: 14
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -2210,8 +2210,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 82.6, y: 186.7}
-  m_SizeDelta: {x: 91.1314, y: 21.9077}
+  m_AnchoredPosition: {x: 75.04163, y: 186.7}
+  m_SizeDelta: {x: 106.2482, y: 21.9077}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1478436879
 MonoBehaviour:
@@ -2260,12 +2260,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
+  m_fontSize: 18
   m_fontSizeBase: 12
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 18
   m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
@@ -2803,9 +2803,9 @@ MonoBehaviour:
   m_fontSize: 14
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 6
+  m_fontSizeMax: 14
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
