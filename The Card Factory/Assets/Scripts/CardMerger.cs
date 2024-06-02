@@ -253,9 +253,11 @@ public class CardMerger : MonoBehaviour
 
         string[] keys = new string[pipCounts.Count];
         pipCounts.Keys.CopyTo(keys, 0);
+        List<string> sortKeys = new List<string>(keys);
+        sortKeys.Sort((string cur, string next) => { return (cur == "0" ? -1 : 0) - (next == "0" ? -1 : 0); });
 
         string finalCost = "";
-        foreach(string pip in keys) {
+        foreach(string pip in sortKeys) {
             if(pip == "0") {
                 finalCost += pipCounts[pip];
                 continue;
@@ -367,6 +369,25 @@ public class CardMerger : MonoBehaviour
     public void SearchRight(string searchTerm) {
         downloadToLeft = false;
         SearchCard(searchTerm);
+    }
+
+    public void Print() {
+        if(mergedCard == null) {
+            return;
+        }
+
+        UICover.SetActive(true);
+        ScreenCapture.CaptureScreenshot("..\\" + mergedCard.name + ".png");
+        Debug.Log("captured screenshot");
+        Invoke("HideCover", 0.2f);
+    }
+
+    private void HideCover() {
+        UICover.SetActive(false);
+    }
+
+    public void Quit() {
+        Application.Quit();
     }
     #endregion
 }
