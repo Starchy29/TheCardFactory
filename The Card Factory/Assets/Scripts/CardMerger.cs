@@ -144,7 +144,7 @@ public class CardMerger : MonoBehaviour
         HashSet<string> realKeywords = RemoveKeywords(ref leftRules, leftCard.keywords);
         realKeywords.UnionWith(RemoveKeywords(ref rightRules, rightCard.keywords));
 
-        mergedCard.oracle_text = leftRules + "\n" + rightRules;
+        mergedCard.oracle_text = leftRules + (leftRules.Length > 0 ? "\n" : "") + rightRules;
         mergedCard.oracle_text = mergedCard.oracle_text.Replace(leftCard.name.Length > rightCard.name.Length ? leftCard.name : rightCard.name, "~").Replace(leftCard.name.Length > rightCard.name.Length ? rightCard.name : leftCard.name, "~").Replace("~", mergedCard.name);
 
         if(realKeywords.Count > 0) {
@@ -152,7 +152,7 @@ public class CardMerger : MonoBehaviour
             foreach(string keyword in realKeywords) {
                 keywordChunk += keyword.ToLower() + ", ";
             }
-            keywordChunk = char.ToUpper(keywordChunk[0]) + keywordChunk.Substring(1) ;
+            keywordChunk = char.ToUpper(keywordChunk[0]) + keywordChunk.Substring(1, keywordChunk.Length - 1 - 2); // cut out last comman
 
             mergedCard.oracle_text = keywordChunk + "\n" + mergedCard.oracle_text;
         }
@@ -185,11 +185,17 @@ public class CardMerger : MonoBehaviour
             }
         }
 
+        bool hasRules = false;
         for(int i = 0; i < ruleText.Length; i++) {
             if(ruleText[i] != ',' && ruleText[i] != ' ' && ruleText[i] != '\n' && ruleText[i] != ';') {
                 ruleText = ruleText.Substring(i);
+                hasRules = true;
                 break;
             }
+        }
+
+        if(!hasRules) {
+            ruleText = "";
         }
 
         return removedKeywords;
