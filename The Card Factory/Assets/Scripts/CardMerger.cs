@@ -145,7 +145,7 @@ public class CardMerger : MonoBehaviour
         realKeywords.UnionWith(RemoveKeywords(ref rightRules, rightCard.keywords));
 
         mergedCard.oracle_text = leftRules + "\n" + rightRules;
-        mergedCard.oracle_text = mergedCard.oracle_text.Replace(leftCard.name, "~").Replace(rightCard.name, "~").Replace("~", mergedCard.name);
+        mergedCard.oracle_text = mergedCard.oracle_text.Replace(leftCard.name.Length > rightCard.name.Length ? leftCard.name : rightCard.name, "~").Replace(leftCard.name.Length > rightCard.name.Length ? rightCard.name : leftCard.name, "~").Replace("~", mergedCard.name);
 
         if(realKeywords.Count > 0) {
             string keywordChunk = "";
